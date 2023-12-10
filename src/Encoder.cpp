@@ -37,8 +37,8 @@ void Encoder::init() {
 	pcnt_config.hctrl_mode = PCNT_MODE_KEEP;    // Keep the primary counter mode if high
 
 	// Set the maximum and minimum limit values to watch
-	pcnt_config.counter_h_lim = std::numeric_limits<int16_t>::max();
-	pcnt_config.counter_l_lim = std::numeric_limits<int16_t>::min();  
+	pcnt_config.counter_h_lim = std::numeric_limits<int32_t>::max();
+	pcnt_config.counter_l_lim = std::numeric_limits<int32_t>::min();  
 
 	
 	/* Initialize PCNT unit */
@@ -68,7 +68,7 @@ void Encoder::init() {
 }
 
 int32_t Encoder::getValue() const {
-	int16_t value;
+	int32_t value;
 	pcnt_get_counter_value(this->pcntUnit, &value);
 	return (((int32_t) value) << 2)
 			+ this->getAddition()
